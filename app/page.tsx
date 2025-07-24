@@ -1,7 +1,5 @@
+import { HomePage } from "./ui/pages/Home";
 
 export default function Home() {
-  return (
-   <div>
-   </div>
-  );
+  return <HomePage />;
 }

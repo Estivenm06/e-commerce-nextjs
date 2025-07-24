@@ -3,14 +3,14 @@ import { Info } from "./Info";
 
 const Menu = () => {
   return (
-    <div className="bg-[#d9d9d9] py-2 border-b-2 border-[#d4d2d5]">
-      <article className="flex flex-wrap justify-between max-w-[1200px] mx-auto h-full">
+    <div className="py-2 border-b-2 border-[#d4d2d5]">
+      <article className="flex flex-wrap justify-center sm:justify-between items-center w-full max-w-screen-xl mx-auto px-4 sm:px-10 gap-4">
         <div className="flex items-center gap-5">
           <Info icon="call" label="+(1) 2019375338" />
           <Info icon="email" label="nova@gmail.com" />
           <Info icon="map" label="Location" />
         </div>
-        <ul className="flex gap-3">
+        <ul className="gap-3 sm:flex hidden">
           {/* X / Twitter */}
           <li>
             <Link href={"https://www.x.com"} target="_blank">
@@ -25,7 +25,12 @@ const Menu = () => {
 
           {/* LinkedIn */}
           <li>
-            <Link href={"https://www.linkedin.com/in/estiven-andres-mejia-gueto-24a05b303/"} target="_blank">
+            <Link
+              href={
+                "https://www.linkedin.com/in/estiven-andres-mejia-gueto-24a05b303/"
+              }
+              target="_blank"
+            >
               <svg className="w-7 h-7 fill-[#0077B5]">
                 <use
                   xlinkHref="./sprite.svg#icon-linkedin"
