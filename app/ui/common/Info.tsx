@@ -1,8 +1,6 @@
 "use client";
 import { Icon } from "@ui5/webcomponents-react";
 import Link from "next/link";
-
-import "@ui5/webcomponents-icons/dist/AllIcons.js";
 import "@ui5/webcomponents-icons/dist/call.js";
 import "@ui5/webcomponents-icons/dist/email.js";
 import "@ui5/webcomponents-icons/dist/map.js";
@@ -23,18 +21,18 @@ const Info = ({ label, icon }: InfoProps) => {
   }
 
   return (
-    <Link
-      href={href}
-      target="_blank"
-      className="
+      <Link
+        href={href}
+        target="_blank"
+        className="
             flex
             items-center
             gap-0.5
           "
-    >
-      <Icon name={icon} />
-      <span className="text-sm text-[#353535] font-light">{label}</span>
-    </Link>
+      >
+        <Icon name={icon} />
+        <span className="text-sm text-[#353535] font-light">{label}</span>
+      </Link>
   );
 };
 

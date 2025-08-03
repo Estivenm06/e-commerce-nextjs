@@ -3,7 +3,6 @@ import { Info } from "./Info";
 
 const Menu = () => {
   return (
-    <div className="py-2 border-b-2 border-[#d4d2d5]">
       <article className="flex flex-wrap justify-center sm:justify-between items-center w-full max-w-screen-xl mx-auto px-4 sm:px-10 gap-4">
         <div className="flex items-center gap-5">
           <Info icon="call" label="+(1) 2019375338" />
@@ -65,7 +64,6 @@ const Menu = () => {
           </li>
         </ul>
       </article>
-    </div>
   );
 };
 

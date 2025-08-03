@@ -1,32 +1,47 @@
 import "dotenv/config";
 import { useEffect, useState } from "react";
 
-import { ProductsType } from "../utils/types";
+import type { ProductsType, AlertType } from "../utils/types";
 
-const STORE = process.env.NEXT_PUBLIC_API;
+const API_URL = process.env.NEXT_PUBLIC_API;
 
-const useGetProducts = () => {
+const useGetProducts = (showAlert: (alert: AlertType) => void) => {
   const [products, setProducts] = useState<Array<ProductsType>>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<null | string>(null);
+  const [categories, setCategories] = useState<Array<string> | []>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const getCategories = (products: Array<ProductsType>) => {
+    const uniqueCategories = new Set(
+      products.map((product) => product.category)
+    );
+    setCategories([...uniqueCategories]);
+  };
 
   useEffect(() => {
     (async () => {
-      setLoading(true);
-      await fetch(`${STORE}/products`)
+      await fetch(`${API_URL}/products`)
         .then(async (response) => {
           if (!response.ok) {
             throw Error("Error fetching products ");
           }
-          const data = await response.json();
+          const data: Array<ProductsType> = await response.json();
+          if (data.length <= 0) {
+            throw Error("No products found");
+          }
           setProducts(data);
+          getCategories(data);
           setLoading(false);
         })
-        .catch((error) => setError(error.message));
+        .catch((error) => showAlert({ message: error.message, type: "error" }));
     })();
   }, []);
-
-  return { products, loading, error };
+  
+  return {
+    categories,
+    loading,
+    principalProduct: products[0],
+    products,
+  };
 };
 
 export { useGetProducts };

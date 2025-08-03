@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+/* Customize the overall scrollbar */
+.tableScroll::-webkit-scrollbar {
+    @apply h-2.5;
+}
+
+/* Customize the scrollbar track */
+.tableScroll::-webkit-scrollbar-track {
+    @apply bg-[#e1e5f2] shadow-inner border border-gray-300;
+}
+
+/* Customize the scrollbar thumb */
+.tableScroll::-webkit-scrollbar-thumb {
+    @apply bg-[#242423] rounded-none;
+}
+
+/* Customize the scrollbar thumb on hover */
+.tableScroll::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#071013];
+}

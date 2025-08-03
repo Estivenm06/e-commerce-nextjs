@@ -1,5 +1,7 @@
-const Shop = () => {
-  return <>This is Shop</>;
-};
+import React from "react";
 
-export default Shop;
+import { ShopPage } from "../ui/pages/Shop";
+
+export default function Shop() {
+  return <ShopPage />;
+}

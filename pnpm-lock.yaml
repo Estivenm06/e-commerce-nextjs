@@ -17,6 +17,9 @@ importers:
       '@ui5/webcomponents-icons':
         specifier: ^2.12.0
         version: 2.12.0
+      '@ui5/webcomponents-icons-tnt':
+        specifier: ^2.12.0
+        version: 2.12.0
       '@ui5/webcomponents-react':
         specifier: ^2.12.0
         version: 2.12.0(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(@ui5/webcomponents-base@2.12.0)(@ui5/webcomponents-fiori@2.12.0)(@ui5/webcomponents-icons@2.12.0)(@ui5/webcomponents@2.12.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
