@@ -13,6 +13,18 @@ const useUser = (
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const localUser = localStorage.getItem("user");
+    if (localUser) {
+      const parsedUser: { username: string; token: string } =
+        JSON.parse(localUser);
+      setUser(parsedUser.username);
+      setToken(parsedUser.token);
+      dispatch({
+        type: "LOAD_CART",
+        payload: { username: parsedUser.username },
+      });
+    }
+
     // Function to fetch users from the API
     const fetchUsers = async () => {
       try {
@@ -48,28 +60,13 @@ const useUser = (
     };
 
     fetchUsers();
-
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const { username, token } = JSON.parse(storedUser);
-      setToken(token);
-      setUser(username);
-      setLoading(false);
-    }
-  }, [token, user, showAlert]);
+  }, [showAlert]);
 
   if (!API_URL) {
     showAlert({
       message: "API URL is not defined",
       type: "error",
     });
-    return {
-      token: null,
-      onSubmit: () => {},
-      logout: () => {},
-      user: null,
-      loading: true,
-    };
   }
 
   // Function to handle user login
@@ -146,4 +143,4 @@ const useUser = (
   return { token, onSubmit, LoginUser, logout, user, loading, users };
 };
 
-export { useUser };
+export default useUser;

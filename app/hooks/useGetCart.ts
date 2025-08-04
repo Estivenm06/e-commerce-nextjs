@@ -5,8 +5,14 @@ const addProduct = (
   state: Cart | null,
   action: Action,
   showAlert: (alert: AlertType) => void
-): Cart | null  => {
-  if (action.type !== 'ADD_PRODUCT' || !state || action.payload === null || !state.products ) return state;
+): Cart | null => {
+  if (
+    action.type !== "ADD_PRODUCT" ||
+    !state ||
+    action.payload === null ||
+    !state.products
+  )
+    return state;
   const existingProductIndex = state.products.findIndex(
     (product) => product.productId === action.payload!.id
   );
@@ -47,7 +53,13 @@ const removeProduct = (
   action: Action,
   showAlert: (alert: AlertType) => void
 ) => {
-  if (action.type !== "REMOVE_PRODUCT" || !state || !action.payload || !state.products) return state;
+  if (
+    action.type !== "REMOVE_PRODUCT" ||
+    !state ||
+    !action.payload ||
+    !state.products
+  )
+    return state;
 
   const updatedProducts = state.products.filter(
     (product) => product.productId !== action.payload!.id
@@ -86,7 +98,13 @@ const selectQuantity = (
   action: Action,
   showAlert: (alert: AlertType) => void
 ) => {
-  if (action.type !== 'SELECT_QUANTITY' || !state || !action.payload || !state.products) return state;
+  if (
+    action.type !== "SELECT_QUANTITY" ||
+    !state ||
+    !action.payload ||
+    !state.products
+  )
+    return state;
   const existingProductIndex = state.products.findIndex(
     (product) => product.productId === action.payload!.id
   );
@@ -114,11 +132,11 @@ const selectQuantity = (
 };
 
 const loadCart = (state: Cart | null, action: Action) => {
-  if(action.type !== 'LOAD_CART' || !state || !action.payload) return state;
+  if (action.type !== "LOAD_CART") return state;
   if (action.payload) {
     state = {
       username: action.payload.username || "",
-      products: [...(action.payload.products || [])],
+      products: [...(action.payload?.products || [])],
     };
     localStorage.setItem("cart", JSON.stringify(state));
     return state;
@@ -135,10 +153,7 @@ const checkout = (
 };
 
 const useGetCart = (showAlert: (alert: AlertType) => void) => {
-  const reducer = (
-    state: Cart | null,
-    action: Action,
-  ): Cart | null  => {
+  const reducer = (state: Cart | null, action: Action): Cart | null => {
     switch (action.type) {
       case "ADD_PRODUCT":
         return addProduct(state, action, showAlert);

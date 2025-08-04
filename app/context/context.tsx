@@ -5,7 +5,7 @@ import { useGetProducts } from "../hooks/useGetProducts";
 import type { StoreContextType } from "../utils/types";
 import { useFilter } from "../hooks/useFilter";
 import { useAlert } from "../hooks/useAlert";
-import { useUser } from "../hooks/useUser";
+import useUser from "../hooks/useUser";
 import { useGetCart } from "../hooks/useGetCart";
 
 const storeContext = createContext<StoreContextType | undefined>(undefined);
