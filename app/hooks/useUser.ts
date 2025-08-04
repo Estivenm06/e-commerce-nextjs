@@ -1,41 +1,16 @@
 import { useEffect, useState } from "react";
-import type { AlertType, User } from "../utils/types";
+import type { AlertType, User, Action } from "../utils/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API;
 
 const useUser = (
   showAlert: (alert: AlertType) => void,
-  dispatch: React.Dispatch<{ type: string; payload?: any }>
+  dispatch: React.Dispatch<Action>
 ) => {
   const [users, setUsers] = useState<User[]>([]);
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const { username, token } = JSON.parse(storedUser);
-      setToken(token);
-      setUser(username);
-      setLoading(false);
-    }
-    fetchUsers();
-  }, [token, user]);
-
-  if (!API_URL) {
-    showAlert({
-      message: "API URL is not defined",
-      type: "error",
-    });
-    return {
-      token: null,
-      onSubmit: () => {},
-      logout: () => {},
-      user: null,
-      loading: true,
-    };
-  }
 
   // Function to fetch users from the API
   const fetchUsers = async () => {
@@ -46,7 +21,15 @@ const useUser = (
       }
       const data = await response.json();
       const usersList = data.map(
-        ({ username, password, id }: { username: string; password: string; id: number }) => {
+        ({
+          username,
+          password,
+          id,
+        }: {
+          username: string;
+          password: string;
+          id: number;
+        }) => {
           return { username, password, id };
         }
       );
@@ -62,6 +45,31 @@ const useUser = (
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const { username, token } = JSON.parse(storedUser);
+      setToken(token);
+      setUser(username);
+      setLoading(false);
+    }
+    fetchUsers();
+  }, [token, user, fetchUsers]);
+
+  if (!API_URL) {
+    showAlert({
+      message: "API URL is not defined",
+      type: "error",
+    });
+    return {
+      token: null,
+      onSubmit: () => {},
+      logout: () => {},
+      user: null,
+      loading: true,
+    };
+  }
 
   // Function to handle user login
   const LoginUser = async ({

@@ -47,13 +47,19 @@ const CartPage = () => {
         </div>
         <div className="flex justify-end">
           <div className="flex gap-2 p-1.5">
-          <button className="bg-[#242423] text-white px-5 md:px-10 py-1.5 rounded font-semibold cursor-pointer hover:scale-105 transition-all ease" onClick={() => dispatch({type: "CHECKOUT", payload: {}})}>
-            Checkout
-          </button>
-          <button className="bg-[#f5cb5c] text-white px-5 py-1.5 rounded font-semibold cursor-pointer hover:scale-105 transition-all ease flex items-center gap-2" onClick={() => dispatch({type: "CLEAR_CART", payload: {}})}>
-            <Icon name="clear-all" className="fill-white" />
-            Clear
-          </button>
+            <button
+              className="bg-[#242423] text-white px-5 md:px-10 py-1.5 rounded font-semibold cursor-pointer hover:scale-105 transition-all ease"
+              onClick={() => dispatch({ type: "CHECKOUT", payload: null })}
+            >
+              Checkout
+            </button>
+            <button
+              className="bg-[#f5cb5c] text-white px-5 py-1.5 rounded font-semibold cursor-pointer hover:scale-105 transition-all ease flex items-center gap-2"
+              onClick={() => dispatch({ type: "CLEAR_CART", payload: null })}
+            >
+              <Icon name="clear-all" className="fill-white" />
+              Clear
+            </button>
           </div>
         </div>
       </div>

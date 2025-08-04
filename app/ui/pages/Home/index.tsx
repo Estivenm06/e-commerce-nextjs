@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Image from 'next/image';
 import Link from "next/link";
 
 import { useStoreContext } from "../../../context/context";
@@ -34,7 +35,9 @@ const HomePage = () => {
         <SkeletonImage />
       ) : (
         <div className="w-full md:w-[75%] flex justify-center items-center ">
-          <img
+          <Image
+            width={400}
+            height={400}
             src={principalProduct.image}
             alt={principalProduct.title}
             className="max-w-[250px] md:max-w-[300px] lg:max-w-[400px] h-auto shadow-sm rounded-xl"

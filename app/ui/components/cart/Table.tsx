@@ -10,13 +10,14 @@ import {
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/sys-cancel.js";
 import "@ui5/webcomponents-icons/dist/add.js";
+import Image from "next/image";
 
 import { useStoreContext } from "../../../context/context";
 
 const TableCart = () => {
   const { cart, products, dispatch } = useStoreContext();
 
-  if (!cart || !products) return null;
+  if (!cart || !products || !cart.products) return null;
   const totalProducts = cart.products.reduce((acc, product) => {
     const productDetails = products.find((p) => p.id === product.productId);
     if (!productDetails) return acc;
@@ -107,10 +108,12 @@ const TableCart = () => {
         className="hover:bg-gray-100 transition-colors border-b-2 border-gray-300 py-2 "
       >
         <TableCell>
-          <img
+          <Image
             src={productDetails.image}
             alt={productDetails.title}
             className="w-fit h-20 object-contain select-none ml-5"
+            height={80}
+            width={80}
           />
         </TableCell>
         <TableCell>

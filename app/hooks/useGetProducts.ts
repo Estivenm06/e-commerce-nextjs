@@ -34,7 +34,7 @@ const useGetProducts = (showAlert: (alert: AlertType) => void) => {
         })
         .catch((error) => showAlert({ message: error.message, type: "error" }));
     })();
-  }, []);
+  }, [ showAlert ]);
   
   return {
     categories,

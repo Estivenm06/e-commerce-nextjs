@@ -41,10 +41,10 @@ const ContextProvider: React.FC<contextProps> = ({ children }) => {
     user,
     loading: authLoading,
     users,
-    LoginUser
+    LoginUser,
   } = useUser(showAlert, dispatch);
-  let usersList = users || [];
-  let loginButton = LoginUser || (() => {});
+  const usersList = users || [];
+  const loginButton = LoginUser || (() => {});
 
   // Compute overall loading state
   const loading = productsLoading || authLoading;
@@ -68,7 +68,7 @@ const ContextProvider: React.FC<contextProps> = ({ children }) => {
       onSubmit,
       logout,
       user,
-      users : usersList,
+      users: usersList,
       LoginUser: loginButton,
 
       // Cart

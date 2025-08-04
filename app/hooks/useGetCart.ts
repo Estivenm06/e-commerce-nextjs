@@ -1,14 +1,14 @@
 import { useEffect, useReducer } from "react";
-import type { AlertType, Cart } from "../utils/types";
+import type { AlertType, Cart, Action } from "../utils/types";
 
 const addProduct = (
   state: Cart | null,
-  action: any,
+  action: Action,
   showAlert: (alert: AlertType) => void
-) => {
-  if (!state) return state;
+): Cart | null  => {
+  if (action.type !== 'ADD_PRODUCT' || !state || action.payload === null || !state.products ) return state;
   const existingProductIndex = state.products.findIndex(
-    (product) => product.productId === action.payload.id
+    (product) => product.productId === action.payload!.id
   );
 
   let newState;
@@ -44,12 +44,13 @@ const addProduct = (
 
 const removeProduct = (
   state: Cart | null,
-  action: any,
+  action: Action,
   showAlert: (alert: AlertType) => void
 ) => {
-  if (!state) return state;
+  if (action.type !== "REMOVE_PRODUCT" || !state || !action.payload || !state.products) return state;
+
   const updatedProducts = state.products.filter(
-    (product) => product.productId !== action.payload.id
+    (product) => product.productId !== action.payload!.id
   );
   if (updatedProducts.length === state.products.length) {
     showAlert({
@@ -82,12 +83,12 @@ const clearCart = (
 
 const selectQuantity = (
   state: Cart | null,
-  action: any,
+  action: Action,
   showAlert: (alert: AlertType) => void
 ) => {
-  if (!state) return state;
+  if (action.type !== 'SELECT_QUANTITY' || !state || !action.payload || !state.products) return state;
   const existingProductIndex = state.products.findIndex(
-    (product) => product.productId === action.payload.id
+    (product) => product.productId === action.payload!.id
   );
   if (existingProductIndex !== -1) {
     showAlert({
@@ -98,7 +99,7 @@ const selectQuantity = (
       ...state,
       products: state.products.map((product, index) =>
         index === existingProductIndex
-          ? { ...product, quantity: action.payload.quantity }
+          ? { ...product, quantity: action.payload!.quantity }
           : product
       ),
     };
@@ -112,14 +113,15 @@ const selectQuantity = (
   return state;
 };
 
-const loadCart = (state: Cart | null, action: any) => {
+const loadCart = (state: Cart | null, action: Action) => {
+  if(action.type !== 'LOAD_CART' || !state || !action.payload) return state;
   if (action.payload) {
-    const newState = {
+    state = {
       username: action.payload.username || "",
-      products: [...(action.payload?.products || [])],
+      products: [...(action.payload.products || [])],
     };
-    localStorage.setItem("cart", JSON.stringify(newState));
-    return newState;
+    localStorage.setItem("cart", JSON.stringify(state));
+    return state;
   }
   return state;
 };
@@ -135,12 +137,8 @@ const checkout = (
 const useGetCart = (showAlert: (alert: AlertType) => void) => {
   const reducer = (
     state: Cart | null,
-    action: {
-      type: string;
-      payload?: any;
-      showAlert?: (alert: AlertType) => void;
-    }
-  ) => {
+    action: Action,
+  ): Cart | null  => {
     switch (action.type) {
       case "ADD_PRODUCT":
         return addProduct(state, action, showAlert);

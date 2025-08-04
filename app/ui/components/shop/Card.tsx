@@ -2,6 +2,7 @@ import React from "react";
 
 import { Card, CardHeader } from "@ui5/webcomponents-react";
 import type { ProductType } from "../../../utils/types";
+import Image from "next/image";
 
 const ProductCard = ({ product }: ProductType) => {
   const titleText =
@@ -19,10 +20,12 @@ const ProductCard = ({ product }: ProductType) => {
         }
         className="w-70 h-fit flex flex-col"
       >
-        <img
+        <Image
           src={product.image}
           alt={product.title}
           className="w-full h-80 object-contain p-5 mx-auto select-none"
+          width={200}
+          height={200}
         />
       </Card>
   );

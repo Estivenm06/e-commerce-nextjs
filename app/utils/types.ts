@@ -44,10 +44,10 @@ export type User = {
 
 export type Cart = {
   username: string;
-  products: {
+  products?: {
     productId: number;
     quantity: number;
-  }[];
+  }[]; 
 }
 
 export type StoreContextType = {
@@ -73,12 +73,22 @@ export type StoreContextType = {
 
   // Cart
   cart: Cart | null; 
-  dispatch: React.Dispatch<{ type: string; payload?: any }>;
+  dispatch: React.Dispatch<Action>;
 
   // Alert
   alert: AlertType;
-  showAlert: (alert: AlertType) => void;
+  
 };
+
+export type Action =
+| { type: "ADD_PRODUCT"; payload: { id: number } | null }
+| { type: "REMOVE_PRODUCT"; payload: { id: number,  } | null  }
+| { type: "CLEAR_CART"; payload: null  }
+| { type: "SELECT_QUANTITY"; payload: { id: number; quantity: number } | null }
+| { type: "LOAD_CART"; payload: Cart | null  }
+| { type: "CHECKOUT"; payload: null };
+
+
 
 export type PaginationProps = {
   page: number;

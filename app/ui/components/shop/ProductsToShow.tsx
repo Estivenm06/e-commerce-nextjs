@@ -1,3 +1,6 @@
+import React from "react";
+
+import Image from "next/image";
 import { Modals } from "@ui5/webcomponents-react";
 import type { ProductsType } from "../../../utils/types";
 import { ProductCard } from "./Card";
@@ -17,7 +20,9 @@ const ProductsToShow = ({ products }: { products: ProductsType[] }) => {
               headerText: product.title,
               children: (
                 <div className="flex flex-col items-center max-w-[450px] mx-auto">
-                  <img
+                  <Image
+                    width={200}
+                    height={200}
                     src={product.image}
                     alt={product.title}
                     className="w-80 h-80 object-contain p-5 mx-auto select-none"
