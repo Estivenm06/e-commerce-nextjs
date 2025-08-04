@@ -10,7 +10,7 @@ const useFilter = (
     rating: 5,
   });
   const [filteredProducts, setFilteredProducts] =
-    useState<Array<ProductsType>>(products);
+    useState<Array<ProductsType>>([]);
 
   useEffect(() => {
     if (products.length > 0) {
@@ -45,7 +45,6 @@ const useFilter = (
           message: "No products found for the selected filter",
           type: "warning",
         });
-        console.log(alert);
       }
     }
   };

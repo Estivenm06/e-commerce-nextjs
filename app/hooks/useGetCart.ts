@@ -168,7 +168,7 @@ const useGetCart = (showAlert: (alert: AlertType) => void) => {
     }
   }, [dispatch]);
 
-  return { cart, dispatch };
+  return { cart, dispatch, showAlert };
 };
 
 export { useGetCart };

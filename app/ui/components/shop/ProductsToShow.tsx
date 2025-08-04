@@ -26,6 +26,7 @@ const ProductsToShow = ({ products }: { products: ProductsType[] }) => {
                     src={product.image}
                     alt={product.title}
                     className="w-80 h-80 object-contain p-5 mx-auto select-none"
+                    priority
                   />
                   <h2 className="text-xl font-semibold mt-4">
                     ${product.price}

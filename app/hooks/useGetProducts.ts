@@ -18,7 +18,7 @@ const useGetProducts = (showAlert: (alert: AlertType) => void) => {
   };
 
   useEffect(() => {
-    (async () => {
+    const fetchProducts = async () => {
       await fetch(`${API_URL}/products`)
         .then(async (response) => {
           if (!response.ok) {
@@ -33,9 +33,10 @@ const useGetProducts = (showAlert: (alert: AlertType) => void) => {
           setLoading(false);
         })
         .catch((error) => showAlert({ message: error.message, type: "error" }));
-    })();
-  }, [ showAlert ]);
-  
+    };
+    fetchProducts();
+  }, [showAlert]);
+
   return {
     categories,
     loading,

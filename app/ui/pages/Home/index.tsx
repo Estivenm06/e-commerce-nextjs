@@ -36,11 +36,12 @@ const HomePage = () => {
       ) : (
         <div className="w-full md:w-[75%] flex justify-center items-center ">
           <Image
-            width={400}
-            height={400}
+            width={300}
+            height={300}
             src={principalProduct.image}
             alt={principalProduct.title}
             className="max-w-[250px] md:max-w-[300px] lg:max-w-[400px] h-auto shadow-sm rounded-xl"
+            priority
           />
         </div>
       )}

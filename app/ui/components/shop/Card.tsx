@@ -26,6 +26,7 @@ const ProductCard = ({ product }: ProductType) => {
           className="w-full h-80 object-contain p-5 mx-auto select-none"
           width={200}
           height={200}
+          priority
         />
       </Card>
   );

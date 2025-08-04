@@ -31,8 +31,8 @@ const AccountsPage = () => {
                       </div>
                     ),
                     footer: (
-                      <div className="w-full flex justify-end items-center py-7 gap-4">
-                        <button className="bg-[#242423] text-white px-5 md:px-10 py-1.5 rounded font-semibold cursor-pointer hover:scale-105 transition-all ease"
+                      <div className="w-full flex justify-end items-center py-7 gap-2 md:gap-4">
+                        <button className="bg-[#242423] text-white px-3 md:px-10 py-1 md:py-1.5 rounded font-semibold cursor-pointer hover:scale-105 transition-all ease"
                           onClick={() => {
                             LoginUser({username: user.username, password: user.password });
                             close();
@@ -41,7 +41,7 @@ const AccountsPage = () => {
                           Log in Directly
                         </button>
                         <button
-                          className="bg-[#f5cb5c] text-white px-5 md:px-10 py-1.5 rounded font-semibold cursor-pointer hover:scale-105 transition-all ease"
+                          className="bg-[#f5cb5c] text-[#242423] px-3 md:px-10 py-1 md:py-1.5 rounded font-semibold cursor-pointer hover:scale-105 transition-all ease"
                           onClick={async () => {
                             await navigator.clipboard.writeText(user.password);
                             alert(
