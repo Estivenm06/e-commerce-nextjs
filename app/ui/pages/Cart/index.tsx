@@ -40,7 +40,7 @@ const CartPage = () => {
 
   return (
     <article className="w-full max-w-screen-xl flex flex-col justify-center items-center px-4 sm:px-10 lg:p-0 gap-10 mx-auto">
-      <h1 className="text-3xl font-bold capitalize">{cart.username}'s Cart</h1>
+      <h1 className="text-3xl font-bold capitalize">{cart.username}&apos;s Cart</h1>
       <div className="w-full max-w-screen-xl flex flex-col gap-4 p-4 rounded-xs shadow-lg pb-10">
         <div className="overflow-auto h-[500px] w-full tableScroll">
           <TableCart />

@@ -43,8 +43,6 @@ const ContextProvider: React.FC<contextProps> = ({ children }) => {
     users,
     LoginUser,
   } = useUser(showAlert, dispatch);
-  const usersList = users || [];
-  const loginButton = LoginUser || (() => {});
 
   // Compute overall loading state
   const loading = productsLoading || authLoading;
@@ -68,8 +66,8 @@ const ContextProvider: React.FC<contextProps> = ({ children }) => {
       onSubmit,
       logout,
       user,
-      users: usersList,
-      LoginUser: loginButton,
+      users: users || [],
+      LoginUser: LoginUser || (() => {}),
 
       // Cart
       cart,
@@ -98,6 +96,7 @@ const ContextProvider: React.FC<contextProps> = ({ children }) => {
       logout,
       user,
       users,
+      LoginUser,
 
       // Cart
       cart,

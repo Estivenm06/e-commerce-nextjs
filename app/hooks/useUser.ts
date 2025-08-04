@@ -12,41 +12,43 @@ const useUser = (
   const [user, setUser] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Function to fetch users from the API
-  const fetchUsers = async () => {
-    try {
-      const response = await fetch(`${API_URL}/users`);
-      if (!response.ok) {
-        throw new Error("Failed to fetch users");
-      }
-      const data = await response.json();
-      const usersList = data.map(
-        ({
-          username,
-          password,
-          id,
-        }: {
-          username: string;
-          password: string;
-          id: number;
-        }) => {
-          return { username, password, id };
-        }
-      );
-      setUsers(usersList);
-      setLoading(false);
-    } catch (error) {
-      if (error instanceof Error) {
-        showAlert({
-          message: error.message,
-          type: "error",
-        });
-      }
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    // Function to fetch users from the API
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(`${API_URL}/users`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await response.json();
+        const usersList = data.map(
+          ({
+            username,
+            password,
+            id,
+          }: {
+            username: string;
+            password: string;
+            id: number;
+          }) => {
+            return { username, password, id };
+          }
+        );
+        setUsers(usersList);
+        setLoading(false);
+      } catch (error) {
+        if (error instanceof Error) {
+          showAlert({
+            message: error.message,
+            type: "error",
+          });
+        }
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const { username, token } = JSON.parse(storedUser);
@@ -54,8 +56,7 @@ const useUser = (
       setUser(username);
       setLoading(false);
     }
-    fetchUsers();
-  }, [token, user, fetchUsers]);
+  }, [token, user, showAlert]);
 
   if (!API_URL) {
     showAlert({

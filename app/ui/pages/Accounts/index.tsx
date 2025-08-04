@@ -32,13 +32,9 @@ const AccountsPage = () => {
                     ),
                     footer: (
                       <div className="w-full flex justify-end items-center py-7 gap-4">
-                        <button
-                          className="bg-[#242423] text-white px-5 md:px-10 py-1.5 rounded font-semibold cursor-pointer hover:scale-105 transition-all ease"
+                        <button className="bg-[#242423] text-white px-5 md:px-10 py-1.5 rounded font-semibold cursor-pointer hover:scale-105 transition-all ease"
                           onClick={() => {
-                            LoginUser({
-                              username: user.username,
-                              password: user.password,
-                            });
+                            LoginUser({username: user.username, password: user.password });
                             close();
                           }}
                         >
