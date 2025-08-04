@@ -134,10 +134,12 @@ const useUser = (
   const logout = () => {
     localStorage.removeItem("user");
     setToken(null);
+    setUser(null);
     showAlert({
       message: "Logged out successfully",
       type: "success",
     });
+    window.location.href = "/";
   };
 
   return { token, onSubmit, LoginUser, logout, user, loading, users };
